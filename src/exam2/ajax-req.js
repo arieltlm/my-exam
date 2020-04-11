@@ -29,7 +29,7 @@ const reqFun = (url, methods, query, key) =>
         });
     });
 
-// 自动重试请求
+// 请求
 const repeatReq = (url, methods, query, key) =>
     new Promise((resolve, reject) => {
         reqFun(url, methods, query, key)
