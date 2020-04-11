@@ -59,12 +59,15 @@ const repeatReq = (url, methods, query, key) =>
 // 等待正在请求的那个请求完成请求了直接返回值
 const waitBeforeReq = (currentReq, key) =>
     new Promise((resolve) => {
-        const interval = setInterval(() => {
-            if (cacheObj[key].data && cacheObj[key]?.status === "free" && currentReq.readyState === 4) {
-                clearInterval(interval);
-                resolve(cacheObj[key].data);
-            }
-        }, 500);
+        // const interval = setInterval(() => {
+        //     if (cacheObj[key].data && cacheObj[key]?.status === "free" && currentReq.readyState === 4) {
+        //         clearInterval(interval);
+        //         resolve(cacheObj[key].data);
+        //     }
+        // }, 500);
+        currentReq.addEventListener("load", function () {
+            resolve(cacheObj[key].data);
+        });
     });
 
 const ajaxReq = (url, methods, query) => {
@@ -83,7 +86,7 @@ const ajaxReq = (url, methods, query) => {
     }
     // 之前没有出现过就在缓存中增加一条记录并发起请求
     cacheObj[key] = {
-        status: "free", // 当前接口请求的状态
+        status: "free", // 当前接口请求的状态 'free|running'
         data: null, // 缓存数据
         errorCount: 0,
         autoRefreshCount: 5, // 自动重试的总次数
