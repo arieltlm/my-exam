@@ -8,10 +8,9 @@ const Job = function ({
     name,
     status,
     time,
-    index
 }) { 
     return (
-        <div className={`job job${index}`}>
+        <div className="job">
             <div className="status">
                 {
                     status === 'success' 
@@ -31,7 +30,6 @@ Job.propTypes = {
     name: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,
     time: PropTypes.number.isRequired,
-    index: PropTypes.number.isRequired
 }
 
 // Job.defaultProps = {

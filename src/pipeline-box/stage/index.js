@@ -11,13 +11,12 @@ const Stage = function ({
     return (
       <div className="stage">
         <div className="title">{title}</div>
-        {jobs.map((jobItem, index) => (
+        {jobs.map(jobItem => (
             <Job
                 key={jobItem.name}
                 name={jobItem.name}
                 status={jobItem.status}
                 time={jobItem.time}
-                index={index}
             />
         ))}
       </div>
